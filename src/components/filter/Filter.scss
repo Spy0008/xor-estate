@@ -1,0 +1,63 @@
+@import "../../responsive.scss";
+
+.filter {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    h1 {
+        font-weight: 300;
+        font-size: 24px;
+    }
+
+    .item {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+
+        label {
+            font-size: 10px;
+        }
+
+        input,
+        select {
+            width: 100px;
+            padding: 10px;
+            border: 1px solid gainsboro;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+    }
+
+    .top {
+        input {
+            width: 100%;
+        }
+    }
+
+    .bottom {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+
+
+        button {
+            width: 100px;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            background-color: rgb(164, 55, 55);
+
+            @include sm {
+                padding: 10px;
+                border-radius: 10px;
+            }
+
+            img {
+                width: 24px;
+                height: 24px;
+            }
+        }
+    }
+}
