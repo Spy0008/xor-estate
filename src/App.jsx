@@ -2,6 +2,7 @@ import HomePage from "./pages/homePage/HomePage.jsx";
 import Layout from "./pages/layout/Layout.jsx";
 import ListPage from "./pages/listPage/ListPage.jsx";
 import SinglePage from "./pages/singlePage/SinglePage.jsx";
+import ProfilePage from "./pages/profilePage/ProfilePage.jsx";
 
 import {
   createBrowserRouter,
@@ -27,6 +28,10 @@ function App() {
         {
           path: "/:id",
           element: <SinglePage />
+        },
+        {
+          path: "/profile",
+          element: <ProfilePage />
         },
       ]
     },
