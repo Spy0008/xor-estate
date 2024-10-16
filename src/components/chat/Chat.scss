@@ -1,0 +1,128 @@
+.chat {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .messages {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding-right: 10px;
+        gap: 20px;
+        overflow-y: scroll;
+
+        h1 {
+            font-weight: 300;
+        }
+
+        .message {
+            background-color: whitesmoke;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            cursor: pointer;
+
+
+            img {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+
+            span {
+                font-weight: bold;
+            }
+        }
+    }
+
+    .chatBox {
+        flex: 1;
+        background-color: whitesmoke;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+
+        .top {
+            background-color: rgba(159, 51, 51, 0.732);
+            color: white;
+            padding: 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .user {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+
+                img {
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                    object-fit: cover;
+
+                }
+
+            }
+
+            .close {
+                cursor: pointer;
+            }
+        }
+
+        .center{
+            height: 350px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            overflow: scroll;
+
+            .chatMessage{
+                width: 50%;
+
+                &.own{
+                    align-self: flex-end;
+                    text-align: right;
+                }
+
+                span{
+                    font-size: 12px;
+                    background-color: rgba(197, 76, 76, 0.203);
+                    padding: 2px;
+                    border-radius: 5px;
+                }
+            }
+        }
+
+        .bottom {
+            border-top: 2px solid gainsboro;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            textarea{
+                flex: 3;
+                height: 100%;
+                border: none;
+                padding: 20px;
+                font-size: large;
+            }
+
+            button{
+                flex: 1;
+                background-color: rgba(159, 51, 51, 0.732);
+                color: white;
+                height: 100%;
+                border: none;
+                cursor: pointer;
+            }
+        }
+    }
+}
