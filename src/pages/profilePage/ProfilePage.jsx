@@ -1,8 +1,21 @@
 import "./ProfilePage.scss";
 import List from "../../components/list/List";
 import Chat from "../../components/chat/Chat";
+import apiRequest from "../../lib/apiRequest"
+import { useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {
+    const navigate = useNavigate();
+    const handleLogout = async () => {
+        try {
+            const response = await apiRequest.post("/auth/logout");
+            localStorage.removeItem("user");
+            navigate("/")
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <div className="profilePage">
             <div className="details">
@@ -15,6 +28,7 @@ const ProfilePage = () => {
                         <span>Avatar: <img src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="" /></span>
                         <span>Username: <b>John Doe</b></span>
                         <span>Email: <b>JohnDoe@gmail.com</b></span>
+                        <button onClick={handleLogout}>Logout</button>
                     </div>
                     <div className="title">
                         <h1>My List</h1>

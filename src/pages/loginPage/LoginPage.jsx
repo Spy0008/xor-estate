@@ -1,15 +1,52 @@
+import { useState } from "react";
 import "./LoginPage.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import apiRequest from "../../lib/apiRequest";
 
 function LoginPage() {
+  const [error, setError] = useState("");
+  const [isLaoding, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true)
+    setError("")
+
+    const formData = new FormData(e.target);
+
+    const username = formData.get("username")
+    const password = formData.get("password")
+
+    try {
+      const response = await apiRequest.post("/auth/login", {
+        username,
+        password
+      })
+
+      localStorage.setItem("user", JSON.stringify(response.data))
+
+       navigate("/")
+
+
+    } catch (error) {
+      console.log(error);
+      setError(error.response.data.message)
+    } finally {
+      setIsLoading(false)
+    }
+  }
   return (
     <div className="login">
       <div className="formContainer">
-        <form>
+        <form onSubmit={handleSubmit}>
           <h1>Welcome back</h1>
-          <input name="username" type="text" placeholder="Username" />
-          <input name="password" type="password" placeholder="Password" />
-          <button>Login</button>
+          <input name="username" required minLength={3} maxLength={20} type="text" placeholder="Username" />
+          <input name="password" required minLength={6} type="password" placeholder="Password" />
+          <button disabled={isLaoding}>Login</button>
+          {
+            error && <span>{error}</span>
+          }
           <Link to="/register">{"Don't"} you have an account?</Link>
         </form>
       </div>
