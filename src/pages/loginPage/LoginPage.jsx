@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./LoginPage.scss";
 import { Link, useNavigate } from "react-router-dom";
 import apiRequest from "../../lib/apiRequest";
+import { AuthContext } from "../../context/AuthContext";
 
 function LoginPage() {
+
+  const { updateUser } = useContext(AuthContext);
+
   const [error, setError] = useState("");
   const [isLaoding, setIsLoading] = useState(false);
 
@@ -24,9 +28,9 @@ function LoginPage() {
         password
       })
 
-      localStorage.setItem("user", JSON.stringify(response.data))
+      updateUser(response.data);
 
-       navigate("/")
+      navigate("/")
 
 
     } catch (error) {

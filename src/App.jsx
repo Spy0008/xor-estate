@@ -1,5 +1,5 @@
 import HomePage from "./pages/homePage/HomePage.jsx";
-import Layout from "./pages/layout/Layout.jsx";
+import { Layout, RequireAuth } from "./pages/layout/Layout.jsx";
 import ListPage from "./pages/listPage/ListPage.jsx";
 import SinglePage from "./pages/singlePage/SinglePage.jsx";
 import ProfilePage from "./pages/profilePage/ProfilePage.jsx";
@@ -11,6 +11,7 @@ import {
 } from "react-router-dom"
 import LoginPage from "./pages/loginPage/LoginPage.jsx";
 import RegisterPage from "./pages/registerPage/RegisterPage.jsx";
+import ProfileUpdatePage from "./pages/profileUpdatePage/ProfileUpdatePage.jsx";
 
 function App() {
 
@@ -31,10 +32,7 @@ function App() {
           path: "/:id",
           element: <SinglePage />
         },
-        {
-          path: "/profile",
-          element: <ProfilePage />
-        },
+
         {
           path: "/login",
           element: <LoginPage />
@@ -45,6 +43,20 @@ function App() {
         },
       ]
     },
+    {
+      path: "/",
+      element: <RequireAuth />,
+      children: [
+        {
+          path: "/profile",
+          element: <ProfilePage />
+        },
+        {
+          path: "/profile/update",
+          element: <ProfileUpdatePage />
+        },
+      ]
+    }
   ])
   return (
     <RouterProvider router={router} />
