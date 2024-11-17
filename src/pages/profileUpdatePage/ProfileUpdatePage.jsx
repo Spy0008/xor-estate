@@ -10,7 +10,7 @@ const ProfileUpdatePage = () => {
 
     const { currentUser, updateUser } = useContext(AuthContext);
 
-    const [avatar, setAvatar] = useState(currentUser.avatar);
+    const [avatar, setAvatar] = useState([]);
     const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
@@ -25,7 +25,7 @@ const ProfileUpdatePage = () => {
                 username,
                 email,
                 password,
-                avatar,
+                avatar:avatar[0]
             })
 
             updateUser(response.data);
@@ -74,7 +74,7 @@ const ProfileUpdatePage = () => {
                 </form>
             </div>
             <div className="sideContainer">
-                <img src={avatar || "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"} alt="" className="avatar" />
+                <img src={avatar[0] || currentUser.avatar || "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"} alt="" className="avatar" />
                 <UploadWidget uwConfig={{
                     cloudName: "dojnru4gb",
                     uploadPreset: "xorbook",
@@ -82,7 +82,7 @@ const ProfileUpdatePage = () => {
                     maxImageFileSize: 2000000,
                     folder: "avatar"
                 }}
-                    setAvatar={setAvatar}
+                    setState={setAvatar}
                 />
             </div>
         </div>

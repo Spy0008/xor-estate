@@ -12,6 +12,8 @@ import {
 import LoginPage from "./pages/loginPage/LoginPage.jsx";
 import RegisterPage from "./pages/registerPage/RegisterPage.jsx";
 import ProfileUpdatePage from "./pages/profileUpdatePage/ProfileUpdatePage.jsx";
+import NewPostPage from "./pages/newPostPage/NewPostPage.jsx";
+import { listPageLoader, singlePageLoader } from "./lib/loaders.js";
 
 function App() {
 
@@ -26,11 +28,13 @@ function App() {
         },
         {
           path: "/list",
-          element: <ListPage />
+          element: <ListPage />,
+          loader: listPageLoader,
         },
         {
           path: "/:id",
-          element: <SinglePage />
+          element: <SinglePage />,
+          loader: singlePageLoader,
         },
 
         {
@@ -54,6 +58,10 @@ function App() {
         {
           path: "/profile/update",
           element: <ProfileUpdatePage />
+        },
+        {
+          path: "/add",
+          element: <NewPostPage />
         },
       ]
     }
