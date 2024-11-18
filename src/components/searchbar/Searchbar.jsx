@@ -17,8 +17,6 @@ const Searchbar = () => {
   }
 
   const handleChange = (e) => {
-    e.preventDefault();
-
     setQuery((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 

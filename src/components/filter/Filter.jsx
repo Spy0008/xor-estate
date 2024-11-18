@@ -1,9 +1,33 @@
+import { useSearchParams } from "react-router-dom";
 import "./Filter.scss";
+import { useState } from "react";
 
 const Filter = () => {
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [query, setQuery] = useState({
+    type: searchParams.get("type") || "",
+    city: searchParams.get("city") || "",
+    property: searchParams.get("property") || "",
+    minPrice: searchParams.get("minPrice") || 0,
+    maxPrice: searchParams.get("maxPrice") || 100000000,
+    bedroom: searchParams.get("bedroom") || 1,
+  });
+
+  const handleChange = (e) => {
+    setQuery({
+      ...query,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const handleFilter = () => {
+    setSearchParams(query)
+  }
+
   return (
     <div className="filter">
-      <h1>Search result for <b>Mumbai</b></h1>
+      <h1>Search result for <b>{searchParams.get("city")}</b></h1>
       <div className="top">
         <div className="item">
           <label htmlFor="city">
@@ -14,6 +38,8 @@ const Filter = () => {
             id="city"
             name="city"
             placeholder="City Location"
+            onChange={handleChange}
+            defaultValue={query.city}
           />
         </div>
       </div>
@@ -22,7 +48,7 @@ const Filter = () => {
           <label htmlFor="type">
             Type
           </label>
-          <select name="type" id="type">
+          <select name="type" id="type" onChange={handleChange} defaultValue={query.type}>
             <option value="">Any</option>
             <option value="buy">Buy</option>
             <option value="rent">Rent</option>
@@ -32,7 +58,7 @@ const Filter = () => {
           <label htmlFor="property">
             Property
           </label>
-          <select name="property" id="property">
+          <select name="property" id="property" onChange={handleChange} defaultValue={query.property}>
             <option value="">Any</option>
             <option value="apartment">Apartment</option>
             <option value="house">House</option>
@@ -49,6 +75,8 @@ const Filter = () => {
             id="minPrice"
             name="minPrice"
             placeholder="Any"
+            onChange={handleChange}
+            defaultValue={query.minPrice}
           />
         </div>
         <div className="item">
@@ -60,6 +88,8 @@ const Filter = () => {
             id="maxPrice"
             name="maxPrice"
             placeholder="Any"
+            onChange={handleChange}
+            defaultValue={query.maxPrice}
           />
         </div>
         <div className="item">
@@ -71,9 +101,11 @@ const Filter = () => {
             id="bedroom"
             name="bedroom"
             placeholder="Any"
+            onChange={handleChange}
+            defaultValue={query.bedroom}
           />
         </div>
-        <button>
+        <button onClick={handleFilter}>
           <img src="/search.png" alt="" />
         </button>
       </div>
